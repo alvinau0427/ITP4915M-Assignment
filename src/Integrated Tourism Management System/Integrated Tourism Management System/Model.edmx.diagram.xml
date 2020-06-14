@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="3a3782a85c9d4d3186d34d970fe639ca" Name="Diagram1">
+        <EntityTypeShape EntityType="tickettailor_dbModel.attraction" Width="1.5" PointX="1.5" PointY="39.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="tickettailor_dbModel.attractionbooking" Width="1.5" PointX="0.75" PointY="35.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="tickettailor_dbModel.attractionprice" Width="1.5" PointX="3.75" PointY="38.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="tickettailor_dbModel.carrier" Width="1.5" PointX="1.5" PointY="32" IsExpanded="true" />
+        <EntityTypeShape EntityType="tickettailor_dbModel.corganizer" Width="1.5" PointX="1.5" PointY="28.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="tickettailor_dbModel.cruise" Width="1.5" PointX="0.75" PointY="24" IsExpanded="true" />
+        <EntityTypeShape EntityType="tickettailor_dbModel.cruisebooking" Width="1.5" PointX="3" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="tickettailor_dbModel.customer" Width="1.5" PointX="0.75" PointY="2.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="tickettailor_dbModel.driver" Width="1.5" PointX="1.5" PointY="46.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="tickettailor_dbModel.driverroster" Width="1.5" PointX="0.75" PointY="43.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="tickettailor_dbModel.equipment" Width="1.5" PointX="3" PointY="24.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="tickettailor_dbModel.equipmentlist" Width="1.5" PointX="5.25" PointY="15.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="tickettailor_dbModel.flightbooking" Width="1.5" PointX="6" PointY="9.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="tickettailor_dbModel.flightclass" Width="1.5" PointX="3.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="tickettailor_dbModel.flightschedule" Width="1.5" PointX="3.75" PointY="31" IsExpanded="true" />
+        <EntityTypeShape EntityType="tickettailor_dbModel.hotel" Width="1.5" PointX="1.5" PointY="19.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="tickettailor_dbModel.hotel_room" Width="1.5" PointX="0.75" PointY="15.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="tickettailor_dbModel.hotelbooking" Width="1.5" PointX="3" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="tickettailor_dbModel.indirect" Width="1.5" PointX="6" PointY="31.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="tickettailor_dbModel.package" Width="1.5" PointX="3.75" PointY="40.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="tickettailor_dbModel.staff" Width="1.5" PointX="0.75" PointY="9.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="tickettailor_dbModel.vehicle" Width="1.5" PointX="0.75" PointY="50.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="tickettailor_dbModel.vehiclebooking" Width="1.5" PointX="3" PointY="14.25" IsExpanded="true" />
+        <AssociationConnector Association="tickettailor_dbModel.attractionbooking_fk1" ManuallyRouted="false" />
+        <AssociationConnector Association="tickettailor_dbModel.attractionprice_fk1" ManuallyRouted="false" />
+        <AssociationConnector Association="tickettailor_dbModel.package_fk1" ManuallyRouted="false" />
+        <AssociationConnector Association="tickettailor_dbModel.vehiclebooking_fk3" ManuallyRouted="false" />
+        <AssociationConnector Association="tickettailor_dbModel.flightschedul_fk1" ManuallyRouted="false" />
+        <AssociationConnector Association="tickettailor_dbModel.cruise_fk1" ManuallyRouted="false" />
+        <AssociationConnector Association="tickettailor_dbModel.cruisebooking_fk1" ManuallyRouted="false" />
+        <AssociationConnector Association="tickettailor_dbModel.cruisebooking_fk2" ManuallyRouted="false" />
+        <AssociationConnector Association="tickettailor_dbModel.cruisebooking_fk3" ManuallyRouted="false" />
+        <AssociationConnector Association="tickettailor_dbModel.flightbooking_fk2" ManuallyRouted="false" />
+        <AssociationConnector Association="tickettailor_dbModel.hotelbooking_fk2" ManuallyRouted="false" />
+        <AssociationConnector Association="tickettailor_dbModel.driverroster_fk1" ManuallyRouted="false" />
+        <AssociationConnector Association="tickettailor_dbModel.vehiclebooking_fk5" ManuallyRouted="false" />
+        <AssociationConnector Association="tickettailor_dbModel.equipmentlist_fk1" ManuallyRouted="false" />
+        <AssociationConnector Association="tickettailor_dbModel.equipmentlist_fk2" ManuallyRouted="false" />
+        <AssociationConnector Association="tickettailor_dbModel.flightbooking_fk1" ManuallyRouted="false" />
+        <AssociationConnector Association="tickettailor_dbModel.flightbooking_fk3" ManuallyRouted="false" />
+        <AssociationConnector Association="tickettailor_dbModel.flightbooking_fk4" ManuallyRouted="false" />
+        <AssociationConnector Association="tickettailor_dbModel.indirect_fk1" ManuallyRouted="false" />
+        <AssociationConnector Association="tickettailor_dbModel.hotel_room_fk1" ManuallyRouted="false" />
+        <AssociationConnector Association="tickettailor_dbModel.hotelbooking_fk3" ManuallyRouted="false" />
+        <AssociationConnector Association="tickettailor_dbModel.hotelbooking_fk1" ManuallyRouted="false" />
+        <AssociationConnector Association="tickettailor_dbModel.vehiclebooking_fk2" ManuallyRouted="false" />
+        <AssociationConnector Association="tickettailor_dbModel.vehiclebooking_fk1" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

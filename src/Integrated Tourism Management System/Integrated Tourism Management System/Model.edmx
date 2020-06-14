@@ -1,0 +1,2022 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="tickettailor_dbModel.Store" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.6" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="attraction">
+          <Key>
+            <PropertyRef Name="AttractName" />
+          </Key>
+          <Property Name="AttractName" Type="varchar" MaxLength="40" Nullable="false" />
+          <Property Name="Duration" Type="varchar" MaxLength="10" />
+          <Property Name="Cancellation" Type="varchar" MaxLength="7" />
+          <Property Name="AttractPhoto" Type="varchar" MaxLength="40" />
+          <Property Name="City" Type="varchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="attractionbooking">
+          <Key>
+            <PropertyRef Name="AttractionBookingID" />
+          </Key>
+          <Property Name="AttractionBookingID" Type="int" Nullable="false" />
+          <Property Name="AttractName" Type="varchar" MaxLength="40" />
+          <Property Name="AdultNum" Type="int" />
+          <Property Name="ChildNum" Type="int" />
+          <Property Name="AdultPrice" Type="int" />
+          <Property Name="ChildPrice" Type="int" />
+          <Property Name="Status" Type="varchar" MaxLength="20" />
+          <Property Name="OrderDate" Type="date" />
+          <Property Name="OrderBy" Type="varchar" MaxLength="10" />
+          <Property Name="CustID" Type="char" MaxLength="4" />
+        </EntityType>
+        <EntityType Name="attractionprice">
+          <Key>
+            <PropertyRef Name="AttractName" />
+            <PropertyRef Name="Visitor" />
+          </Key>
+          <Property Name="AttractName" Type="varchar" MaxLength="40" Nullable="false" />
+          <Property Name="Visitor" Type="char" MaxLength="5" Nullable="false" />
+          <Property Name="Price" Type="int" />
+        </EntityType>
+        <EntityType Name="carrier">
+          <Key>
+            <PropertyRef Name="CID" />
+          </Key>
+          <Property Name="CID" Type="int" Nullable="false" />
+          <Property Name="CarrierName" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="CarrLogo" Type="varchar" MaxLength="15" />
+          <Property Name="IATA" Type="char" MaxLength="2" />
+        </EntityType>
+        <EntityType Name="corganizer">
+          <Key>
+            <PropertyRef Name="OrganID" />
+          </Key>
+          <Property Name="OrganID" Type="int" Nullable="false" />
+          <Property Name="OrganizerE" Type="varchar" MaxLength="20" />
+          <Property Name="OrganizerC" Type="varchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="cruise">
+          <Key>
+            <PropertyRef Name="CruiseNo" />
+          </Key>
+          <Property Name="CruiseNo" Type="char" MaxLength="6" Nullable="false" />
+          <Property Name="CruiseName" Type="varchar" MaxLength="100" />
+          <Property Name="RefPrice" Type="decimal" Precision="11" Scale="2" />
+          <Property Name="TourDay" Type="int" />
+          <Property Name="OrganID" Type="int" />
+          <Property Name="Info" Type="varchar" MaxLength="10" />
+          <Property Name="StartDate" Type="date" />
+        </EntityType>
+        <EntityType Name="cruisebooking">
+          <Key>
+            <PropertyRef Name="CruiseBookingID" />
+          </Key>
+          <Property Name="CruiseBookingID" Type="int" Nullable="false" />
+          <Property Name="CruiseNo" Type="char" MaxLength="6" />
+          <Property Name="AdultNum" Type="int" />
+          <Property Name="ChildNum" Type="int" />
+          <Property Name="AdultPrice" Type="int" />
+          <Property Name="ChildPrice" Type="int" />
+          <Property Name="OrderDate" Type="date" />
+          <Property Name="OrderBy" Type="varchar" MaxLength="10" />
+          <Property Name="CustID" Type="char" MaxLength="4" />
+        </EntityType>
+        <EntityType Name="customer">
+          <Key>
+            <PropertyRef Name="CustID" />
+          </Key>
+          <Property Name="CustID" Type="char" MaxLength="4" Nullable="false" />
+          <Property Name="Surname" Type="varchar" MaxLength="10" />
+          <Property Name="GivenName" Type="varchar" MaxLength="30" />
+          <Property Name="DateOfBirth" Type="date" />
+          <Property Name="Gender" Type="char" MaxLength="1" />
+          <Property Name="Passport" Type="varchar" MaxLength="9" />
+          <Property Name="Contact" Type="char" MaxLength="8" />
+          <Property Name="Nationality" Type="varchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="driver">
+          <Key>
+            <PropertyRef Name="DriverID" />
+          </Key>
+          <Property Name="DriverID" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="StaffName" Type="varchar" MaxLength="30" />
+          <Property Name="Gender" Type="char" MaxLength="1" />
+          <Property Name="Center" Type="char" MaxLength="2" />
+          <Property Name="Email" Type="varchar" MaxLength="50" />
+          <Property Name="Pass" Type="char" MaxLength="40" />
+          <Property Name="Position" Type="varchar" MaxLength="30" />
+          <Property Name="Salary" Type="int" Nullable="false" />
+          <Property Name="Ctype" Type="varchar" MaxLength="10" />
+          <Property Name="Late" Type="int" />
+          <Property Name="SImage" Type="varchar" MaxLength="10" />
+          <Property Name="SparePass" Type="varchar" MaxLength="40" />
+        </EntityType>
+        <EntityType Name="driverbooking">
+          <Key>
+            <PropertyRef Name="DriverRosterID" />
+            <PropertyRef Name="BookingDate" />
+          </Key>
+          <Property Name="DriverRosterID" Type="int" Nullable="false" />
+          <Property Name="BookingDate" Type="date" Nullable="false" />
+          <Property Name="CustID" Type="char" MaxLength="4" />
+          <Property Name="VehicleBookingID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="driverroster">
+          <Key>
+            <PropertyRef Name="DriverRosterID" />
+          </Key>
+          <Property Name="DriverRosterID" Type="int" Nullable="false" />
+          <Property Name="DriverID" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="TimeSlot" Type="int" Nullable="false" />
+          <Property Name="Available" Type="char" MaxLength="7" Nullable="false" />
+        </EntityType>
+        <EntityType Name="equipment">
+          <Key>
+            <PropertyRef Name="EquipID" />
+          </Key>
+          <Property Name="EquipID" Type="char" MaxLength="3" Nullable="false" />
+          <Property Name="Equipment" Type="varchar" MaxLength="50" />
+          <Property Name="Suitable" Type="varchar" MaxLength="10" />
+          <Property Name="Price" Type="decimal" Precision="11" Scale="2" />
+          <Property Name="EquipPhoto" Type="char" MaxLength="7" />
+        </EntityType>
+        <EntityType Name="equipmentlist">
+          <Key>
+            <PropertyRef Name="VehicleBookingID" />
+            <PropertyRef Name="EquipID" />
+          </Key>
+          <Property Name="VehicleBookingID" Type="int" Nullable="false" />
+          <Property Name="EquipID" Type="char" MaxLength="3" Nullable="false" />
+          <Property Name="EquipNum" Type="int" Nullable="false" />
+          <Property Name="EquipBookPrice" Type="decimal" Precision="11" Scale="2" />
+        </EntityType>
+        <EntityType Name="flightbooking">
+          <Key>
+            <PropertyRef Name="FlightOrderID" />
+          </Key>
+          <Property Name="FlightOrderID" Type="int" Nullable="false" />
+          <Property Name="FlightID" Type="int" />
+          <Property Name="FlightNo" Type="varchar" MaxLength="6" />
+          <Property Name="FlightClass" Type="varchar" MaxLength="8" />
+          <Property Name="FlightType" Type="varchar" MaxLength="8" />
+          <Property Name="AdultNum" Type="int" />
+          <Property Name="ChildNum" Type="int" />
+          <Property Name="InfantNum" Type="int" />
+          <Property Name="AdultPrice" Type="decimal" Precision="11" Scale="2" />
+          <Property Name="ChildPrice" Type="decimal" Precision="11" Scale="2" />
+          <Property Name="InfantPrice" Type="decimal" Precision="11" Scale="2" />
+          <Property Name="OrderDate" Type="date" />
+          <Property Name="OrderBy" Type="varchar" MaxLength="10" />
+          <Property Name="CustID" Type="char" MaxLength="4" />
+        </EntityType>
+        <EntityType Name="flightclass">
+          <Key>
+            <PropertyRef Name="FlightNo" />
+            <PropertyRef Name="Class" />
+            <PropertyRef Name="FlightType" />
+          </Key>
+          <Property Name="FlightNo" Type="varchar" MaxLength="6" Nullable="false" />
+          <Property Name="Class" Type="varchar" MaxLength="8" Nullable="false" />
+          <Property Name="FlightType" Type="varchar" MaxLength="8" Nullable="false" />
+          <Property Name="Price_Adult" Type="decimal" Precision="11" Scale="2" />
+          <Property Name="Price_Children" Type="decimal" Precision="11" Scale="2" />
+          <Property Name="Price_Infant" Type="decimal" Precision="11" Scale="2" />
+          <Property Name="Tax" Type="decimal" Precision="11" Scale="2" />
+        </EntityType>
+        <EntityType Name="flightschedule">
+          <Key>
+            <PropertyRef Name="FlightID" />
+          </Key>
+          <Property Name="FlightID" Type="int" Nullable="false" />
+          <Property Name="Carrier" Type="int" />
+          <Property Name="EDD" Type="date" />
+          <Property Name="EDA" Type="date" />
+          <Property Name="ETD" Type="time" Precision="0" />
+          <Property Name="ETA" Type="time" Precision="0" />
+          <Property Name="Origin" Type="char" MaxLength="3" />
+          <Property Name="Dest" Type="char" MaxLength="3" />
+          <Property Name="Aircraft" Type="varchar" MaxLength="8" />
+          <Property Name="TravelTime" Type="int" />
+          <Property Name="FlightNo" Type="varchar" MaxLength="6" />
+          <Property Name="FlightType" Type="varchar" MaxLength="8" />
+        </EntityType>
+        <EntityType Name="hotel">
+          <Key>
+            <PropertyRef Name="HotelID" />
+          </Key>
+          <Property Name="HotelID" Type="int" Nullable="false" />
+          <Property Name="Hotel_chi_name" Type="varchar" MaxLength="20" />
+          <Property Name="Hotel_en_name" Type="varchar" MaxLength="60" />
+          <Property Name="Star" Type="decimal" Precision="2" Scale="1" />
+          <Property Name="Rating" Type="decimal" Precision="2" Scale="1" />
+          <Property Name="Region" Type="varchar" MaxLength="50" />
+          <Property Name="Address" Type="varchar" MaxLength="100" />
+          <Property Name="Tel" Type="char" MaxLength="8" />
+        </EntityType>
+        <EntityType Name="hotel_room">
+          <Key>
+            <PropertyRef Name="Hotel_roomID" />
+          </Key>
+          <Property Name="Hotel_roomID" Type="int" Nullable="false" />
+          <Property Name="Hotel_chi_name" Type="varchar" MaxLength="20" />
+          <Property Name="Hotel_room_name" Type="varchar" MaxLength="60" />
+          <Property Name="Hotel room size" Type="varchar" MaxLength="7" />
+          <Property Name="Max_adult" Type="int" />
+          <Property Name="Max_child" Type="int" />
+          <Property Name="Hotel_room_description" Type="varchar" MaxLength="20" />
+          <Property Name="Fare" Type="decimal" Precision="11" Scale="2" />
+          <Property Name="HotelID" Type="int" />
+        </EntityType>
+        <EntityType Name="hotelbooking">
+          <Key>
+            <PropertyRef Name="HotelRoomID" />
+            <PropertyRef Name="Checkin" />
+            <PropertyRef Name="Checkout" />
+          </Key>
+          <Property Name="HotelRoomID" Type="int" Nullable="false" />
+          <Property Name="Checkin" Type="date" Nullable="false" />
+          <Property Name="Checkout" Type="date" Nullable="false" />
+          <Property Name="CustID" Type="char" MaxLength="4" Nullable="false" />
+          <Property Name="NumNight" Type="int" />
+          <Property Name="NumRoom" Type="int" />
+          <Property Name="Price" Type="decimal" Precision="11" Scale="2" />
+          <Property Name="OrderDate" Type="date" />
+          <Property Name="OrderBy" Type="varchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="indirect">
+          <Key>
+            <PropertyRef Name="FlightID" />
+            <PropertyRef Name="StopNo" />
+          </Key>
+          <Property Name="FlightID" Type="int" Nullable="false" />
+          <Property Name="StopNo" Type="int" Nullable="false" />
+          <Property Name="Stop" Type="char" MaxLength="3" />
+          <Property Name="EDD" Type="date" />
+          <Property Name="ETD" Type="time" Precision="5" />
+          <Property Name="EDA" Type="date" />
+          <Property Name="ETA" Type="time" Precision="5" />
+        </EntityType>
+        <EntityType Name="package">
+          <Key>
+            <PropertyRef Name="PackageNo" />
+          </Key>
+          <Property Name="PackageNo" Type="int" Nullable="false" />
+          <Property Name="Attaction" Type="varchar" MaxLength="40" />
+          <Property Name="Package" Type="varchar" MaxLength="15" />
+          <Property Name="Adult_price" Type="int" />
+          <Property Name="Child_price" Type="int" />
+        </EntityType>
+        <EntityType Name="staff">
+          <Key>
+            <PropertyRef Name="StaffID" />
+          </Key>
+          <Property Name="StaffID" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="StaffName" Type="varchar" MaxLength="30" />
+          <Property Name="Gender" Type="char" MaxLength="1" />
+          <Property Name="Center" Type="char" MaxLength="4" />
+          <Property Name="Email" Type="varchar" MaxLength="50" />
+          <Property Name="Pass" Type="char" MaxLength="40" />
+          <Property Name="Position" Type="varchar" MaxLength="30" />
+          <Property Name="Salary" Type="decimal" Precision="11" Scale="2" />
+          <Property Name="Ctype" Type="varchar" MaxLength="10" />
+          <Property Name="Late" Type="int" />
+          <Property Name="SImage" Type="varchar" MaxLength="10" />
+          <Property Name="SparePass" Type="varchar" MaxLength="40" />
+        </EntityType>
+        <EntityType Name="tag">
+          <Key>
+            <PropertyRef Name="Tag" />
+            <PropertyRef Name="TagTypeID" />
+            <PropertyRef Name="TagType" />
+          </Key>
+          <Property Name="Tag" Type="int" Nullable="false" />
+          <Property Name="TagTypeID" Type="int" Nullable="false" />
+          <Property Name="TagType" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="vehicle">
+          <Key>
+            <PropertyRef Name="VehicleID" />
+          </Key>
+          <Property Name="VehicleID" Type="char" MaxLength="5" Nullable="false" />
+          <Property Name="VehicleName" Type="varchar" MaxLength="60" Nullable="false" />
+          <Property Name="Price" Type="decimal" Precision="11" Scale="2" />
+          <Property Name="VehicleType" Type="varchar" MaxLength="10" />
+          <Property Name="Capacity" Type="int" />
+          <Property Name="Gear" Type="varchar" MaxLength="5" />
+          <Property Name="Color" Type="varchar" MaxLength="30" />
+          <Property Name="VehiclePhoto" Type="char" MaxLength="9" />
+        </EntityType>
+        <EntityType Name="vehiclebooking">
+          <Key>
+            <PropertyRef Name="VehicleBookingID" />
+          </Key>
+          <Property Name="VehicleBookingID" Type="int" Nullable="false" />
+          <Property Name="VehicleID" Type="char" MaxLength="5" />
+          <Property Name="AttractionBookingID" Type="int" />
+          <Property Name="BookDay" Type="int" />
+          <Property Name="OrderDate" Type="date" />
+          <Property Name="OrderBy" Type="varchar" MaxLength="10" />
+          <Property Name="PickupDate" Type="date" />
+          <Property Name="DropoffDate" Type="date" />
+          <Property Name="DriverCost" Type="decimal" Precision="11" Scale="2" />
+          <Property Name="VehicleBookPrice" Type="decimal" Precision="11" Scale="2" />
+        </EntityType>
+        <Association Name="attractionbooking_fk1">
+          <End Role="attraction" Type="Self.attraction" Multiplicity="0..1" />
+          <End Role="attractionbooking" Type="Self.attractionbooking" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="attraction">
+              <PropertyRef Name="AttractName" />
+            </Principal>
+            <Dependent Role="attractionbooking">
+              <PropertyRef Name="AttractName" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="attractionbooking_fk2">
+          <End Role="staff" Type="Self.staff" Multiplicity="0..1" />
+          <End Role="attractionbooking" Type="Self.attractionbooking" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="staff">
+              <PropertyRef Name="StaffID" />
+            </Principal>
+            <Dependent Role="attractionbooking">
+              <PropertyRef Name="OrderBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="attractionbooking_fk3">
+          <End Role="customer" Type="Self.customer" Multiplicity="0..1" />
+          <End Role="attractionbooking" Type="Self.attractionbooking" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="customer">
+              <PropertyRef Name="CustID" />
+            </Principal>
+            <Dependent Role="attractionbooking">
+              <PropertyRef Name="CustID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="attractionprice_fk1">
+          <End Role="attraction" Type="Self.attraction" Multiplicity="1" />
+          <End Role="attractionprice" Type="Self.attractionprice" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="attraction">
+              <PropertyRef Name="AttractName" />
+            </Principal>
+            <Dependent Role="attractionprice">
+              <PropertyRef Name="AttractName" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="cruise_fk1">
+          <End Role="corganizer" Type="Self.corganizer" Multiplicity="0..1" />
+          <End Role="cruise" Type="Self.cruise" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="corganizer">
+              <PropertyRef Name="OrganID" />
+            </Principal>
+            <Dependent Role="cruise">
+              <PropertyRef Name="OrganID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="cruisebooking_fk1">
+          <End Role="cruise" Type="Self.cruise" Multiplicity="0..1" />
+          <End Role="cruisebooking" Type="Self.cruisebooking" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="cruise">
+              <PropertyRef Name="CruiseNo" />
+            </Principal>
+            <Dependent Role="cruisebooking">
+              <PropertyRef Name="CruiseNo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="cruisebooking_fk2">
+          <End Role="staff" Type="Self.staff" Multiplicity="0..1" />
+          <End Role="cruisebooking" Type="Self.cruisebooking" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="staff">
+              <PropertyRef Name="StaffID" />
+            </Principal>
+            <Dependent Role="cruisebooking">
+              <PropertyRef Name="OrderBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="cruisebooking_fk3">
+          <End Role="customer" Type="Self.customer" Multiplicity="0..1" />
+          <End Role="cruisebooking" Type="Self.cruisebooking" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="customer">
+              <PropertyRef Name="CustID" />
+            </Principal>
+            <Dependent Role="cruisebooking">
+              <PropertyRef Name="CustID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="driverbooking_fk1">
+          <End Role="driverroster" Type="Self.driverroster" Multiplicity="1" />
+          <End Role="driverbooking" Type="Self.driverbooking" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="driverroster">
+              <PropertyRef Name="DriverRosterID" />
+            </Principal>
+            <Dependent Role="driverbooking">
+              <PropertyRef Name="DriverRosterID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="driverbooking_fk2">
+          <End Role="customer" Type="Self.customer" Multiplicity="0..1" />
+          <End Role="driverbooking" Type="Self.driverbooking" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="customer">
+              <PropertyRef Name="CustID" />
+            </Principal>
+            <Dependent Role="driverbooking">
+              <PropertyRef Name="CustID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="driverbooking_fk3">
+          <End Role="vehiclebooking" Type="Self.vehiclebooking" Multiplicity="1" />
+          <End Role="driverbooking" Type="Self.driverbooking" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="vehiclebooking">
+              <PropertyRef Name="VehicleBookingID" />
+            </Principal>
+            <Dependent Role="driverbooking">
+              <PropertyRef Name="VehicleBookingID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="driverroster_fk1">
+          <End Role="driver" Type="Self.driver" Multiplicity="1" />
+          <End Role="driverroster" Type="Self.driverroster" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="driver">
+              <PropertyRef Name="DriverID" />
+            </Principal>
+            <Dependent Role="driverroster">
+              <PropertyRef Name="DriverID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="equipmentlist_fk1">
+          <End Role="equipment" Type="Self.equipment" Multiplicity="1" />
+          <End Role="equipmentlist" Type="Self.equipmentlist" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="equipment">
+              <PropertyRef Name="EquipID" />
+            </Principal>
+            <Dependent Role="equipmentlist">
+              <PropertyRef Name="EquipID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="equipmentlist_fk2">
+          <End Role="vehiclebooking" Type="Self.vehiclebooking" Multiplicity="1" />
+          <End Role="equipmentlist" Type="Self.equipmentlist" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="vehiclebooking">
+              <PropertyRef Name="VehicleBookingID" />
+            </Principal>
+            <Dependent Role="equipmentlist">
+              <PropertyRef Name="VehicleBookingID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="flightbooking_fk1">
+          <End Role="flightschedule" Type="Self.flightschedule" Multiplicity="0..1" />
+          <End Role="flightbooking" Type="Self.flightbooking" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="flightschedule">
+              <PropertyRef Name="FlightID" />
+            </Principal>
+            <Dependent Role="flightbooking">
+              <PropertyRef Name="FlightID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="flightbooking_fk2">
+          <End Role="customer" Type="Self.customer" Multiplicity="0..1" />
+          <End Role="flightbooking" Type="Self.flightbooking" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="customer">
+              <PropertyRef Name="CustID" />
+            </Principal>
+            <Dependent Role="flightbooking">
+              <PropertyRef Name="CustID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="flightbooking_fk3">
+          <End Role="staff" Type="Self.staff" Multiplicity="0..1" />
+          <End Role="flightbooking" Type="Self.flightbooking" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="staff">
+              <PropertyRef Name="StaffID" />
+            </Principal>
+            <Dependent Role="flightbooking">
+              <PropertyRef Name="OrderBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="flightbooking_fk4">
+          <End Role="flightclass" Type="Self.flightclass" Multiplicity="0..1" />
+          <End Role="flightbooking" Type="Self.flightbooking" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="flightclass">
+              <PropertyRef Name="FlightNo" />
+              <PropertyRef Name="Class" />
+              <PropertyRef Name="FlightType" />
+            </Principal>
+            <Dependent Role="flightbooking">
+              <PropertyRef Name="FlightNo" />
+              <PropertyRef Name="FlightClass" />
+              <PropertyRef Name="FlightType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="flightschedul_fk1">
+          <End Role="carrier" Type="Self.carrier" Multiplicity="0..1" />
+          <End Role="flightschedule" Type="Self.flightschedule" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="carrier">
+              <PropertyRef Name="CID" />
+            </Principal>
+            <Dependent Role="flightschedule">
+              <PropertyRef Name="Carrier" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="hotel_room_fk1">
+          <End Role="hotel" Type="Self.hotel" Multiplicity="0..1" />
+          <End Role="hotel_room" Type="Self.hotel_room" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="hotel">
+              <PropertyRef Name="HotelID" />
+            </Principal>
+            <Dependent Role="hotel_room">
+              <PropertyRef Name="HotelID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="hotelbooking_fk1">
+          <End Role="hotel_room" Type="Self.hotel_room" Multiplicity="1" />
+          <End Role="hotelbooking" Type="Self.hotelbooking" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="hotel_room">
+              <PropertyRef Name="Hotel_roomID" />
+            </Principal>
+            <Dependent Role="hotelbooking">
+              <PropertyRef Name="HotelRoomID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="hotelbooking_fk2">
+          <End Role="customer" Type="Self.customer" Multiplicity="1" />
+          <End Role="hotelbooking" Type="Self.hotelbooking" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="customer">
+              <PropertyRef Name="CustID" />
+            </Principal>
+            <Dependent Role="hotelbooking">
+              <PropertyRef Name="CustID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="hotelbooking_fk3">
+          <End Role="staff" Type="Self.staff" Multiplicity="0..1" />
+          <End Role="hotelbooking" Type="Self.hotelbooking" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="staff">
+              <PropertyRef Name="StaffID" />
+            </Principal>
+            <Dependent Role="hotelbooking">
+              <PropertyRef Name="OrderBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="indirect_fk1">
+          <End Role="flightschedule" Type="Self.flightschedule" Multiplicity="1" />
+          <End Role="indirect" Type="Self.indirect" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="flightschedule">
+              <PropertyRef Name="FlightID" />
+            </Principal>
+            <Dependent Role="indirect">
+              <PropertyRef Name="FlightID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="package_fk1">
+          <End Role="attraction" Type="Self.attraction" Multiplicity="0..1" />
+          <End Role="package" Type="Self.package" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="attraction">
+              <PropertyRef Name="AttractName" />
+            </Principal>
+            <Dependent Role="package">
+              <PropertyRef Name="Attaction" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="vehiclebooking_fk1">
+          <End Role="vehicle" Type="Self.vehicle" Multiplicity="0..1" />
+          <End Role="vehiclebooking" Type="Self.vehiclebooking" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="vehicle">
+              <PropertyRef Name="VehicleID" />
+            </Principal>
+            <Dependent Role="vehiclebooking">
+              <PropertyRef Name="VehicleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="vehiclebooking_fk2">
+          <End Role="attractionbooking" Type="Self.attractionbooking" Multiplicity="0..1" />
+          <End Role="vehiclebooking" Type="Self.vehiclebooking" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="attractionbooking">
+              <PropertyRef Name="AttractionBookingID" />
+            </Principal>
+            <Dependent Role="vehiclebooking">
+              <PropertyRef Name="AttractionBookingID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="vehiclebooking_fk3">
+          <End Role="staff" Type="Self.staff" Multiplicity="0..1" />
+          <End Role="vehiclebooking" Type="Self.vehiclebooking" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="staff">
+              <PropertyRef Name="StaffID" />
+            </Principal>
+            <Dependent Role="vehiclebooking">
+              <PropertyRef Name="OrderBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="tickettailor_dbModelStoreContainer">
+          <EntitySet Name="attraction" EntityType="Self.attraction" Schema="tickettailor_db" store:Type="Tables" />
+          <EntitySet Name="attractionbooking" EntityType="Self.attractionbooking" Schema="tickettailor_db" store:Type="Tables" />
+          <EntitySet Name="attractionprice" EntityType="Self.attractionprice" Schema="tickettailor_db" store:Type="Tables" />
+          <EntitySet Name="carrier" EntityType="Self.carrier" Schema="tickettailor_db" store:Type="Tables" />
+          <EntitySet Name="corganizer" EntityType="Self.corganizer" Schema="tickettailor_db" store:Type="Tables" />
+          <EntitySet Name="cruise" EntityType="Self.cruise" Schema="tickettailor_db" store:Type="Tables" />
+          <EntitySet Name="cruisebooking" EntityType="Self.cruisebooking" Schema="tickettailor_db" store:Type="Tables" />
+          <EntitySet Name="customer" EntityType="Self.customer" Schema="tickettailor_db" store:Type="Tables" />
+          <EntitySet Name="driver" EntityType="Self.driver" Schema="tickettailor_db" store:Type="Tables" />
+          <EntitySet Name="driverbooking" EntityType="Self.driverbooking" Schema="tickettailor_db" store:Type="Tables" />
+          <EntitySet Name="driverroster" EntityType="Self.driverroster" Schema="tickettailor_db" store:Type="Tables" />
+          <EntitySet Name="equipment" EntityType="Self.equipment" Schema="tickettailor_db" store:Type="Tables" />
+          <EntitySet Name="equipmentlist" EntityType="Self.equipmentlist" Schema="tickettailor_db" store:Type="Tables" />
+          <EntitySet Name="flightbooking" EntityType="Self.flightbooking" Schema="tickettailor_db" store:Type="Tables" />
+          <EntitySet Name="flightclass" EntityType="Self.flightclass" Schema="tickettailor_db" store:Type="Tables" />
+          <EntitySet Name="flightschedule" EntityType="Self.flightschedule" Schema="tickettailor_db" store:Type="Tables" />
+          <EntitySet Name="hotel" EntityType="Self.hotel" Schema="tickettailor_db" store:Type="Tables" />
+          <EntitySet Name="hotel_room" EntityType="Self.hotel_room" Schema="tickettailor_db" store:Type="Tables" />
+          <EntitySet Name="hotelbooking" EntityType="Self.hotelbooking" Schema="tickettailor_db" store:Type="Tables" />
+          <EntitySet Name="indirect" EntityType="Self.indirect" Schema="tickettailor_db" store:Type="Tables" />
+          <EntitySet Name="package" EntityType="Self.package" Schema="tickettailor_db" store:Type="Tables" />
+          <EntitySet Name="staff" EntityType="Self.staff" Schema="tickettailor_db" store:Type="Tables" />
+          <EntitySet Name="tag" EntityType="Self.tag" Schema="tickettailor_db" store:Type="Tables" />
+          <EntitySet Name="vehicle" EntityType="Self.vehicle" Schema="tickettailor_db" store:Type="Tables" />
+          <EntitySet Name="vehiclebooking" EntityType="Self.vehiclebooking" Schema="tickettailor_db" store:Type="Tables" />
+          <AssociationSet Name="attractionbooking_fk1" Association="Self.attractionbooking_fk1">
+            <End Role="attraction" EntitySet="attraction" />
+            <End Role="attractionbooking" EntitySet="attractionbooking" />
+          </AssociationSet>
+          <AssociationSet Name="attractionbooking_fk2" Association="Self.attractionbooking_fk2">
+            <End Role="staff" EntitySet="staff" />
+            <End Role="attractionbooking" EntitySet="attractionbooking" />
+          </AssociationSet>
+          <AssociationSet Name="attractionbooking_fk3" Association="Self.attractionbooking_fk3">
+            <End Role="customer" EntitySet="customer" />
+            <End Role="attractionbooking" EntitySet="attractionbooking" />
+          </AssociationSet>
+          <AssociationSet Name="attractionprice_fk1" Association="Self.attractionprice_fk1">
+            <End Role="attraction" EntitySet="attraction" />
+            <End Role="attractionprice" EntitySet="attractionprice" />
+          </AssociationSet>
+          <AssociationSet Name="cruise_fk1" Association="Self.cruise_fk1">
+            <End Role="corganizer" EntitySet="corganizer" />
+            <End Role="cruise" EntitySet="cruise" />
+          </AssociationSet>
+          <AssociationSet Name="cruisebooking_fk1" Association="Self.cruisebooking_fk1">
+            <End Role="cruise" EntitySet="cruise" />
+            <End Role="cruisebooking" EntitySet="cruisebooking" />
+          </AssociationSet>
+          <AssociationSet Name="cruisebooking_fk2" Association="Self.cruisebooking_fk2">
+            <End Role="staff" EntitySet="staff" />
+            <End Role="cruisebooking" EntitySet="cruisebooking" />
+          </AssociationSet>
+          <AssociationSet Name="cruisebooking_fk3" Association="Self.cruisebooking_fk3">
+            <End Role="customer" EntitySet="customer" />
+            <End Role="cruisebooking" EntitySet="cruisebooking" />
+          </AssociationSet>
+          <AssociationSet Name="driverbooking_fk1" Association="Self.driverbooking_fk1">
+            <End Role="driverroster" EntitySet="driverroster" />
+            <End Role="driverbooking" EntitySet="driverbooking" />
+          </AssociationSet>
+          <AssociationSet Name="driverbooking_fk2" Association="Self.driverbooking_fk2">
+            <End Role="customer" EntitySet="customer" />
+            <End Role="driverbooking" EntitySet="driverbooking" />
+          </AssociationSet>
+          <AssociationSet Name="driverbooking_fk3" Association="Self.driverbooking_fk3">
+            <End Role="vehiclebooking" EntitySet="vehiclebooking" />
+            <End Role="driverbooking" EntitySet="driverbooking" />
+          </AssociationSet>
+          <AssociationSet Name="driverroster_fk1" Association="Self.driverroster_fk1">
+            <End Role="driver" EntitySet="driver" />
+            <End Role="driverroster" EntitySet="driverroster" />
+          </AssociationSet>
+          <AssociationSet Name="equipmentlist_fk1" Association="Self.equipmentlist_fk1">
+            <End Role="equipment" EntitySet="equipment" />
+            <End Role="equipmentlist" EntitySet="equipmentlist" />
+          </AssociationSet>
+          <AssociationSet Name="equipmentlist_fk2" Association="Self.equipmentlist_fk2">
+            <End Role="vehiclebooking" EntitySet="vehiclebooking" />
+            <End Role="equipmentlist" EntitySet="equipmentlist" />
+          </AssociationSet>
+          <AssociationSet Name="flightbooking_fk1" Association="Self.flightbooking_fk1">
+            <End Role="flightschedule" EntitySet="flightschedule" />
+            <End Role="flightbooking" EntitySet="flightbooking" />
+          </AssociationSet>
+          <AssociationSet Name="flightbooking_fk2" Association="Self.flightbooking_fk2">
+            <End Role="customer" EntitySet="customer" />
+            <End Role="flightbooking" EntitySet="flightbooking" />
+          </AssociationSet>
+          <AssociationSet Name="flightbooking_fk3" Association="Self.flightbooking_fk3">
+            <End Role="staff" EntitySet="staff" />
+            <End Role="flightbooking" EntitySet="flightbooking" />
+          </AssociationSet>
+          <AssociationSet Name="flightbooking_fk4" Association="Self.flightbooking_fk4">
+            <End Role="flightclass" EntitySet="flightclass" />
+            <End Role="flightbooking" EntitySet="flightbooking" />
+          </AssociationSet>
+          <AssociationSet Name="flightschedul_fk1" Association="Self.flightschedul_fk1">
+            <End Role="carrier" EntitySet="carrier" />
+            <End Role="flightschedule" EntitySet="flightschedule" />
+          </AssociationSet>
+          <AssociationSet Name="hotel_room_fk1" Association="Self.hotel_room_fk1">
+            <End Role="hotel" EntitySet="hotel" />
+            <End Role="hotel_room" EntitySet="hotel_room" />
+          </AssociationSet>
+          <AssociationSet Name="hotelbooking_fk1" Association="Self.hotelbooking_fk1">
+            <End Role="hotel_room" EntitySet="hotel_room" />
+            <End Role="hotelbooking" EntitySet="hotelbooking" />
+          </AssociationSet>
+          <AssociationSet Name="hotelbooking_fk2" Association="Self.hotelbooking_fk2">
+            <End Role="customer" EntitySet="customer" />
+            <End Role="hotelbooking" EntitySet="hotelbooking" />
+          </AssociationSet>
+          <AssociationSet Name="hotelbooking_fk3" Association="Self.hotelbooking_fk3">
+            <End Role="staff" EntitySet="staff" />
+            <End Role="hotelbooking" EntitySet="hotelbooking" />
+          </AssociationSet>
+          <AssociationSet Name="indirect_fk1" Association="Self.indirect_fk1">
+            <End Role="flightschedule" EntitySet="flightschedule" />
+            <End Role="indirect" EntitySet="indirect" />
+          </AssociationSet>
+          <AssociationSet Name="package_fk1" Association="Self.package_fk1">
+            <End Role="attraction" EntitySet="attraction" />
+            <End Role="package" EntitySet="package" />
+          </AssociationSet>
+          <AssociationSet Name="vehiclebooking_fk1" Association="Self.vehiclebooking_fk1">
+            <End Role="vehicle" EntitySet="vehicle" />
+            <End Role="vehiclebooking" EntitySet="vehiclebooking" />
+          </AssociationSet>
+          <AssociationSet Name="vehiclebooking_fk2" Association="Self.vehiclebooking_fk2">
+            <End Role="attractionbooking" EntitySet="attractionbooking" />
+            <End Role="vehiclebooking" EntitySet="vehiclebooking" />
+          </AssociationSet>
+          <AssociationSet Name="vehiclebooking_fk3" Association="Self.vehiclebooking_fk3">
+            <End Role="staff" EntitySet="staff" />
+            <End Role="vehiclebooking" EntitySet="vehiclebooking" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="tickettailor_dbModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="attraction">
+          <Key>
+            <PropertyRef Name="AttractName" />
+          </Key>
+          <Property Name="AttractName" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Duration" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Cancellation" Type="String" MaxLength="7" FixedLength="false" Unicode="false" />
+          <Property Name="AttractPhoto" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
+          <Property Name="City" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="attractionbooking" Relationship="Self.attractionbooking_fk1" FromRole="attraction" ToRole="attractionbooking" />
+          <NavigationProperty Name="attractionprice" Relationship="Self.attractionprice_fk1" FromRole="attraction" ToRole="attractionprice" />
+          <NavigationProperty Name="package" Relationship="Self.package_fk1" FromRole="attraction" ToRole="package" />
+        </EntityType>
+        <EntityType Name="attractionbooking">
+          <Key>
+            <PropertyRef Name="AttractionBookingID" />
+          </Key>
+          <Property Name="AttractionBookingID" Type="Int32" Nullable="false" />
+          <Property Name="AttractName" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
+          <Property Name="AdultNum" Type="Int32" />
+          <Property Name="ChildNum" Type="Int32" />
+          <Property Name="AdultPrice" Type="Int32" />
+          <Property Name="ChildPrice" Type="Int32" />
+          <Property Name="Status" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="OrderDate" Type="DateTime" />
+          <Property Name="OrderBy" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="CustID" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="attraction" Relationship="Self.attractionbooking_fk1" FromRole="attractionbooking" ToRole="attraction" />
+          <NavigationProperty Name="staff" Relationship="Self.attractionbooking_fk2" FromRole="attractionbooking" ToRole="staff" />
+          <NavigationProperty Name="customer" Relationship="Self.attractionbooking_fk3" FromRole="attractionbooking" ToRole="customer" />
+          <NavigationProperty Name="vehiclebooking" Relationship="Self.vehiclebooking_fk2" FromRole="attractionbooking" ToRole="vehiclebooking" />
+        </EntityType>
+        <EntityType Name="attractionprice">
+          <Key>
+            <PropertyRef Name="AttractName" />
+            <PropertyRef Name="Visitor" />
+          </Key>
+          <Property Name="AttractName" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Visitor" Type="String" MaxLength="5" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Price" Type="Int32" />
+          <NavigationProperty Name="attraction" Relationship="Self.attractionprice_fk1" FromRole="attractionprice" ToRole="attraction" />
+        </EntityType>
+        <EntityType Name="carrier">
+          <Key>
+            <PropertyRef Name="CID" />
+          </Key>
+          <Property Name="CID" Type="Int32" Nullable="false" />
+          <Property Name="CarrierName" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CarrLogo" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="IATA" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="flightschedule" Relationship="Self.flightschedul_fk1" FromRole="carrier" ToRole="flightschedule" />
+        </EntityType>
+        <EntityType Name="corganizer">
+          <Key>
+            <PropertyRef Name="OrganID" />
+          </Key>
+          <Property Name="OrganID" Type="Int32" Nullable="false" />
+          <Property Name="OrganizerE" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="OrganizerC" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="cruise" Relationship="Self.cruise_fk1" FromRole="corganizer" ToRole="cruise" />
+        </EntityType>
+        <EntityType Name="cruise">
+          <Key>
+            <PropertyRef Name="CruiseNo" />
+          </Key>
+          <Property Name="CruiseNo" Type="String" MaxLength="6" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CruiseName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="RefPrice" Type="Decimal" />
+          <Property Name="TourDay" Type="Int32" />
+          <Property Name="OrganID" Type="Int32" />
+          <Property Name="Info" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="StartDate" Type="DateTime" />
+          <NavigationProperty Name="corganizer" Relationship="Self.cruise_fk1" FromRole="cruise" ToRole="corganizer" />
+          <NavigationProperty Name="cruisebooking" Relationship="Self.cruisebooking_fk1" FromRole="cruise" ToRole="cruisebooking" />
+        </EntityType>
+        <EntityType Name="cruisebooking">
+          <Key>
+            <PropertyRef Name="CruiseBookingID" />
+          </Key>
+          <Property Name="CruiseBookingID" Type="Int32" Nullable="false" />
+          <Property Name="CruiseNo" Type="String" MaxLength="6" FixedLength="false" Unicode="false" />
+          <Property Name="AdultNum" Type="Int32" />
+          <Property Name="ChildNum" Type="Int32" />
+          <Property Name="AdultPrice" Type="Int32" />
+          <Property Name="ChildPrice" Type="Int32" />
+          <Property Name="OrderDate" Type="DateTime" />
+          <Property Name="OrderBy" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="CustID" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="cruise" Relationship="Self.cruisebooking_fk1" FromRole="cruisebooking" ToRole="cruise" />
+          <NavigationProperty Name="staff" Relationship="Self.cruisebooking_fk2" FromRole="cruisebooking" ToRole="staff" />
+          <NavigationProperty Name="customer" Relationship="Self.cruisebooking_fk3" FromRole="cruisebooking" ToRole="customer" />
+        </EntityType>
+        <EntityType Name="customer">
+          <Key>
+            <PropertyRef Name="CustID" />
+          </Key>
+          <Property Name="CustID" Type="String" MaxLength="4" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Surname" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="GivenName" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="DateOfBirth" Type="DateTime" />
+          <Property Name="Gender" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="Passport" Type="String" MaxLength="9" FixedLength="false" Unicode="false" />
+          <Property Name="Contact" Type="String" MaxLength="8" FixedLength="false" Unicode="false" />
+          <Property Name="Nationality" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="attractionbooking" Relationship="Self.attractionbooking_fk3" FromRole="customer" ToRole="attractionbooking" />
+          <NavigationProperty Name="cruisebooking" Relationship="Self.cruisebooking_fk3" FromRole="customer" ToRole="cruisebooking" />
+          <NavigationProperty Name="driverbooking" Relationship="Self.driverbooking_fk2" FromRole="customer" ToRole="driverbooking" />
+          <NavigationProperty Name="flightbooking" Relationship="Self.flightbooking_fk2" FromRole="customer" ToRole="flightbooking" />
+          <NavigationProperty Name="hotelbooking" Relationship="Self.hotelbooking_fk2" FromRole="customer" ToRole="hotelbooking" />
+        </EntityType>
+        <EntityType Name="driver">
+          <Key>
+            <PropertyRef Name="DriverID" />
+          </Key>
+          <Property Name="DriverID" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="StaffName" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="Gender" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="Center" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Pass" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
+          <Property Name="Position" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="Salary" Type="Int32" Nullable="false" />
+          <Property Name="Ctype" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Late" Type="Int32" />
+          <Property Name="SImage" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="SparePass" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="driverroster" Relationship="Self.driverroster_fk1" FromRole="driver" ToRole="driverroster" />
+        </EntityType>
+        <EntityType Name="driverbooking">
+          <Key>
+            <PropertyRef Name="DriverRosterID" />
+            <PropertyRef Name="BookingDate" />
+          </Key>
+          <Property Name="DriverRosterID" Type="Int32" Nullable="false" />
+          <Property Name="BookingDate" Type="DateTime" Nullable="false" />
+          <Property Name="CustID" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
+          <Property Name="VehicleBookingID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="customer" Relationship="Self.driverbooking_fk2" FromRole="driverbooking" ToRole="customer" />
+          <NavigationProperty Name="driverroster" Relationship="Self.driverbooking_fk1" FromRole="driverbooking" ToRole="driverroster" />
+          <NavigationProperty Name="vehiclebooking" Relationship="Self.driverbooking_fk3" FromRole="driverbooking" ToRole="vehiclebooking" />
+        </EntityType>
+        <EntityType Name="driverroster">
+          <Key>
+            <PropertyRef Name="DriverRosterID" />
+          </Key>
+          <Property Name="DriverRosterID" Type="Int32" Nullable="false" />
+          <Property Name="DriverID" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="TimeSlot" Type="Int32" Nullable="false" />
+          <Property Name="Available" Type="String" MaxLength="7" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="driver" Relationship="Self.driverroster_fk1" FromRole="driverroster" ToRole="driver" />
+          <NavigationProperty Name="driverbooking" Relationship="Self.driverbooking_fk1" FromRole="driverroster" ToRole="driverbooking" />
+        </EntityType>
+        <EntityType Name="equipment">
+          <Key>
+            <PropertyRef Name="EquipID" />
+          </Key>
+          <Property Name="EquipID" Type="String" MaxLength="3" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Equipment1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Suitable" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Price" Type="Decimal" />
+          <Property Name="EquipPhoto" Type="String" MaxLength="7" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="equipmentlist" Relationship="Self.equipmentlist_fk1" FromRole="equipment" ToRole="equipmentlist" />
+        </EntityType>
+        <EntityType Name="equipmentlist">
+          <Key>
+            <PropertyRef Name="VehicleBookingID" />
+            <PropertyRef Name="EquipID" />
+          </Key>
+          <Property Name="VehicleBookingID" Type="Int32" Nullable="false" />
+          <Property Name="EquipID" Type="String" MaxLength="3" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="EquipNum" Type="Int32" Nullable="false" />
+          <Property Name="EquipBookPrice" Type="Decimal" />
+          <NavigationProperty Name="equipment" Relationship="Self.equipmentlist_fk1" FromRole="equipmentlist" ToRole="equipment" />
+          <NavigationProperty Name="vehiclebooking" Relationship="Self.equipmentlist_fk2" FromRole="equipmentlist" ToRole="vehiclebooking" />
+        </EntityType>
+        <EntityType Name="flightbooking">
+          <Key>
+            <PropertyRef Name="FlightOrderID" />
+          </Key>
+          <Property Name="FlightOrderID" Type="Int32" Nullable="false" />
+          <Property Name="FlightID" Type="Int32" />
+          <Property Name="FlightNo" Type="String" MaxLength="6" FixedLength="false" Unicode="false" />
+          <Property Name="FlightClass" Type="String" MaxLength="8" FixedLength="false" Unicode="false" />
+          <Property Name="FlightType" Type="String" MaxLength="8" FixedLength="false" Unicode="false" />
+          <Property Name="AdultNum" Type="Int32" />
+          <Property Name="ChildNum" Type="Int32" />
+          <Property Name="InfantNum" Type="Int32" />
+          <Property Name="AdultPrice" Type="Decimal" />
+          <Property Name="ChildPrice" Type="Decimal" />
+          <Property Name="InfantPrice" Type="Decimal" />
+          <Property Name="OrderDate" Type="DateTime" />
+          <Property Name="OrderBy" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="CustID" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="customer" Relationship="Self.flightbooking_fk2" FromRole="flightbooking" ToRole="customer" />
+          <NavigationProperty Name="flightschedule" Relationship="Self.flightbooking_fk1" FromRole="flightbooking" ToRole="flightschedule" />
+          <NavigationProperty Name="staff" Relationship="Self.flightbooking_fk3" FromRole="flightbooking" ToRole="staff" />
+          <NavigationProperty Name="flightclass1" Relationship="Self.flightbooking_fk4" FromRole="flightbooking" ToRole="flightclass" />
+        </EntityType>
+        <EntityType Name="flightclass">
+          <Key>
+            <PropertyRef Name="FlightNo" />
+            <PropertyRef Name="Class" />
+            <PropertyRef Name="FlightType" />
+          </Key>
+          <Property Name="FlightNo" Type="String" MaxLength="6" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Class" Type="String" MaxLength="8" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="FlightType" Type="String" MaxLength="8" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Price_Adult" Type="Decimal" />
+          <Property Name="Price_Children" Type="Decimal" />
+          <Property Name="Price_Infant" Type="Decimal" />
+          <Property Name="Tax" Type="Decimal" />
+          <NavigationProperty Name="flightbooking" Relationship="Self.flightbooking_fk4" FromRole="flightclass" ToRole="flightbooking" />
+        </EntityType>
+        <EntityType Name="flightschedule">
+          <Key>
+            <PropertyRef Name="FlightID" />
+          </Key>
+          <Property Name="FlightID" Type="Int32" Nullable="false" />
+          <Property Name="Carrier" Type="Int32" />
+          <Property Name="EDD" Type="DateTime" />
+          <Property Name="EDA" Type="DateTime" />
+          <Property Name="ETD" Type="Time" />
+          <Property Name="ETA" Type="Time" />
+          <Property Name="Origin" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
+          <Property Name="Dest" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
+          <Property Name="Aircraft" Type="String" MaxLength="8" FixedLength="false" Unicode="false" />
+          <Property Name="TravelTime" Type="Int32" />
+          <Property Name="FlightNo" Type="String" MaxLength="6" FixedLength="false" Unicode="false" />
+          <Property Name="FlightType" Type="String" MaxLength="8" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="carrier1" Relationship="Self.flightschedul_fk1" FromRole="flightschedule" ToRole="carrier" />
+          <NavigationProperty Name="flightbooking" Relationship="Self.flightbooking_fk1" FromRole="flightschedule" ToRole="flightbooking" />
+          <NavigationProperty Name="indirect" Relationship="Self.indirect_fk1" FromRole="flightschedule" ToRole="indirect" />
+        </EntityType>
+        <EntityType Name="hotel">
+          <Key>
+            <PropertyRef Name="HotelID" />
+          </Key>
+          <Property Name="HotelID" Type="Int32" Nullable="false" />
+          <Property Name="Hotel_chi_name" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Hotel_en_name" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
+          <Property Name="Star" Type="Decimal" />
+          <Property Name="Rating" Type="Decimal" />
+          <Property Name="Region" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Address" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Tel" Type="String" MaxLength="8" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="hotel_room" Relationship="Self.hotel_room_fk1" FromRole="hotel" ToRole="hotel_room" />
+        </EntityType>
+        <EntityType Name="hotel_room">
+          <Key>
+            <PropertyRef Name="Hotel_roomID" />
+          </Key>
+          <Property Name="Hotel_roomID" Type="Int32" Nullable="false" />
+          <Property Name="Hotel_chi_name" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Hotel_room_name" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
+          <Property Name="Hotel_room_size" Type="String" MaxLength="7" FixedLength="false" Unicode="false" />
+          <Property Name="Max_adult" Type="Int32" />
+          <Property Name="Max_child" Type="Int32" />
+          <Property Name="Hotel_room_description" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Fare" Type="Decimal" />
+          <Property Name="HotelID" Type="Int32" />
+          <NavigationProperty Name="hotel" Relationship="Self.hotel_room_fk1" FromRole="hotel_room" ToRole="hotel" />
+          <NavigationProperty Name="hotelbooking" Relationship="Self.hotelbooking_fk1" FromRole="hotel_room" ToRole="hotelbooking" />
+        </EntityType>
+        <EntityType Name="hotelbooking">
+          <Key>
+            <PropertyRef Name="HotelRoomID" />
+            <PropertyRef Name="Checkin" />
+            <PropertyRef Name="Checkout" />
+          </Key>
+          <Property Name="HotelRoomID" Type="Int32" Nullable="false" />
+          <Property Name="Checkin" Type="DateTime" Nullable="false" />
+          <Property Name="Checkout" Type="DateTime" Nullable="false" />
+          <Property Name="CustID" Type="String" MaxLength="4" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="NumNight" Type="Int32" />
+          <Property Name="NumRoom" Type="Int32" />
+          <Property Name="Price" Type="Decimal" />
+          <Property Name="OrderDate" Type="DateTime" />
+          <Property Name="OrderBy" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="customer" Relationship="Self.hotelbooking_fk2" FromRole="hotelbooking" ToRole="customer" />
+          <NavigationProperty Name="hotel_room" Relationship="Self.hotelbooking_fk1" FromRole="hotelbooking" ToRole="hotel_room" />
+          <NavigationProperty Name="staff" Relationship="Self.hotelbooking_fk3" FromRole="hotelbooking" ToRole="staff" />
+        </EntityType>
+        <EntityType Name="indirect">
+          <Key>
+            <PropertyRef Name="FlightID" />
+            <PropertyRef Name="StopNo" />
+          </Key>
+          <Property Name="FlightID" Type="Int32" Nullable="false" />
+          <Property Name="StopNo" Type="Int32" Nullable="false" />
+          <Property Name="Stop" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
+          <Property Name="EDD" Type="DateTime" />
+          <Property Name="ETD" Type="Time" />
+          <Property Name="EDA" Type="DateTime" />
+          <Property Name="ETA" Type="Time" />
+          <NavigationProperty Name="flightschedule" Relationship="Self.indirect_fk1" FromRole="indirect" ToRole="flightschedule" />
+        </EntityType>
+        <EntityType Name="package">
+          <Key>
+            <PropertyRef Name="PackageNo" />
+          </Key>
+          <Property Name="PackageNo" Type="Int32" Nullable="false" />
+          <Property Name="Attaction" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
+          <Property Name="Package1" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="Adult_price" Type="Int32" />
+          <Property Name="Child_price" Type="Int32" />
+          <NavigationProperty Name="attraction" Relationship="Self.package_fk1" FromRole="package" ToRole="attraction" />
+        </EntityType>
+        <EntityType Name="staff">
+          <Key>
+            <PropertyRef Name="StaffID" />
+          </Key>
+          <Property Name="StaffID" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="StaffName" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="Gender" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="Center" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Pass" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
+          <Property Name="Position" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="Salary" Type="Decimal" />
+          <Property Name="Ctype" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Late" Type="Int32" />
+          <Property Name="SImage" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="SparePass" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="attractionbooking" Relationship="Self.attractionbooking_fk2" FromRole="staff" ToRole="attractionbooking" />
+          <NavigationProperty Name="cruisebooking" Relationship="Self.cruisebooking_fk2" FromRole="staff" ToRole="cruisebooking" />
+          <NavigationProperty Name="flightbooking" Relationship="Self.flightbooking_fk3" FromRole="staff" ToRole="flightbooking" />
+          <NavigationProperty Name="hotelbooking" Relationship="Self.hotelbooking_fk3" FromRole="staff" ToRole="hotelbooking" />
+          <NavigationProperty Name="vehiclebooking" Relationship="Self.vehiclebooking_fk3" FromRole="staff" ToRole="vehiclebooking" />
+        </EntityType>
+        <EntityType Name="tag">
+          <Key>
+            <PropertyRef Name="Tag" />
+            <PropertyRef Name="TagTypeID" />
+            <PropertyRef Name="TagType" />
+          </Key>
+          <Property Name="Tag" Type="Int32" Nullable="false" />
+          <Property Name="TagTypeID" Type="Int32" Nullable="false" />
+          <Property Name="TagType" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="vehicle">
+          <Key>
+            <PropertyRef Name="VehicleID" />
+          </Key>
+          <Property Name="VehicleID" Type="String" MaxLength="5" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="VehicleName" Type="String" MaxLength="60" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Price" Type="Decimal" />
+          <Property Name="VehicleType" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Capacity" Type="Int32" />
+          <Property Name="Gear" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="Color" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="VehiclePhoto" Type="String" MaxLength="9" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="vehiclebooking" Relationship="Self.vehiclebooking_fk1" FromRole="vehicle" ToRole="vehiclebooking" />
+        </EntityType>
+        <EntityType Name="vehiclebooking">
+          <Key>
+            <PropertyRef Name="VehicleBookingID" />
+          </Key>
+          <Property Name="VehicleBookingID" Type="Int32" Nullable="false" />
+          <Property Name="VehicleID" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="AttractionBookingID" Type="Int32" />
+          <Property Name="BookDay" Type="Int32" />
+          <Property Name="OrderDate" Type="DateTime" />
+          <Property Name="OrderBy" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="PickupDate" Type="DateTime" />
+          <Property Name="DropoffDate" Type="DateTime" />
+          <Property Name="DriverCost" Type="Decimal" />
+          <Property Name="VehicleBookPrice" Type="Decimal" />
+          <NavigationProperty Name="attractionbooking" Relationship="Self.vehiclebooking_fk2" FromRole="vehiclebooking" ToRole="attractionbooking" />
+          <NavigationProperty Name="driverbooking" Relationship="Self.driverbooking_fk3" FromRole="vehiclebooking" ToRole="driverbooking" />
+          <NavigationProperty Name="equipmentlist" Relationship="Self.equipmentlist_fk2" FromRole="vehiclebooking" ToRole="equipmentlist" />
+          <NavigationProperty Name="staff" Relationship="Self.vehiclebooking_fk3" FromRole="vehiclebooking" ToRole="staff" />
+          <NavigationProperty Name="vehicle" Relationship="Self.vehiclebooking_fk1" FromRole="vehiclebooking" ToRole="vehicle" />
+        </EntityType>
+        <Association Name="attractionbooking_fk1">
+          <End Role="attraction" Type="Self.attraction" Multiplicity="0..1" />
+          <End Role="attractionbooking" Type="Self.attractionbooking" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="attraction">
+              <PropertyRef Name="AttractName" />
+            </Principal>
+            <Dependent Role="attractionbooking">
+              <PropertyRef Name="AttractName" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="attractionprice_fk1">
+          <End Role="attraction" Type="Self.attraction" Multiplicity="1" />
+          <End Role="attractionprice" Type="Self.attractionprice" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="attraction">
+              <PropertyRef Name="AttractName" />
+            </Principal>
+            <Dependent Role="attractionprice">
+              <PropertyRef Name="AttractName" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="package_fk1">
+          <End Role="attraction" Type="Self.attraction" Multiplicity="0..1" />
+          <End Role="package" Type="Self.package" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="attraction">
+              <PropertyRef Name="AttractName" />
+            </Principal>
+            <Dependent Role="package">
+              <PropertyRef Name="Attaction" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="attractionbooking_fk2">
+          <End Role="staff" Type="Self.staff" Multiplicity="0..1" />
+          <End Role="attractionbooking" Type="Self.attractionbooking" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="staff">
+              <PropertyRef Name="StaffID" />
+            </Principal>
+            <Dependent Role="attractionbooking">
+              <PropertyRef Name="OrderBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="attractionbooking_fk3">
+          <End Role="customer" Type="Self.customer" Multiplicity="0..1" />
+          <End Role="attractionbooking" Type="Self.attractionbooking" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="customer">
+              <PropertyRef Name="CustID" />
+            </Principal>
+            <Dependent Role="attractionbooking">
+              <PropertyRef Name="CustID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="vehiclebooking_fk2">
+          <End Role="attractionbooking" Type="Self.attractionbooking" Multiplicity="0..1" />
+          <End Role="vehiclebooking" Type="Self.vehiclebooking" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="attractionbooking">
+              <PropertyRef Name="AttractionBookingID" />
+            </Principal>
+            <Dependent Role="vehiclebooking">
+              <PropertyRef Name="AttractionBookingID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="flightschedul_fk1">
+          <End Role="carrier" Type="Self.carrier" Multiplicity="0..1" />
+          <End Role="flightschedule" Type="Self.flightschedule" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="carrier">
+              <PropertyRef Name="CID" />
+            </Principal>
+            <Dependent Role="flightschedule">
+              <PropertyRef Name="Carrier" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="cruise_fk1">
+          <End Role="corganizer" Type="Self.corganizer" Multiplicity="0..1" />
+          <End Role="cruise" Type="Self.cruise" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="corganizer">
+              <PropertyRef Name="OrganID" />
+            </Principal>
+            <Dependent Role="cruise">
+              <PropertyRef Name="OrganID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="cruisebooking_fk1">
+          <End Role="cruise" Type="Self.cruise" Multiplicity="0..1" />
+          <End Role="cruisebooking" Type="Self.cruisebooking" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="cruise">
+              <PropertyRef Name="CruiseNo" />
+            </Principal>
+            <Dependent Role="cruisebooking">
+              <PropertyRef Name="CruiseNo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="cruisebooking_fk2">
+          <End Role="staff" Type="Self.staff" Multiplicity="0..1" />
+          <End Role="cruisebooking" Type="Self.cruisebooking" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="staff">
+              <PropertyRef Name="StaffID" />
+            </Principal>
+            <Dependent Role="cruisebooking">
+              <PropertyRef Name="OrderBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="cruisebooking_fk3">
+          <End Role="customer" Type="Self.customer" Multiplicity="0..1" />
+          <End Role="cruisebooking" Type="Self.cruisebooking" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="customer">
+              <PropertyRef Name="CustID" />
+            </Principal>
+            <Dependent Role="cruisebooking">
+              <PropertyRef Name="CustID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="driverbooking_fk2">
+          <End Role="customer" Type="Self.customer" Multiplicity="0..1" />
+          <End Role="driverbooking" Type="Self.driverbooking" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="customer">
+              <PropertyRef Name="CustID" />
+            </Principal>
+            <Dependent Role="driverbooking">
+              <PropertyRef Name="CustID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="flightbooking_fk2">
+          <End Role="customer" Type="Self.customer" Multiplicity="0..1" />
+          <End Role="flightbooking" Type="Self.flightbooking" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="customer">
+              <PropertyRef Name="CustID" />
+            </Principal>
+            <Dependent Role="flightbooking">
+              <PropertyRef Name="CustID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="hotelbooking_fk2">
+          <End Role="customer" Type="Self.customer" Multiplicity="1" />
+          <End Role="hotelbooking" Type="Self.hotelbooking" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="customer">
+              <PropertyRef Name="CustID" />
+            </Principal>
+            <Dependent Role="hotelbooking">
+              <PropertyRef Name="CustID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="driverroster_fk1">
+          <End Role="driver" Type="Self.driver" Multiplicity="1" />
+          <End Role="driverroster" Type="Self.driverroster" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="driver">
+              <PropertyRef Name="DriverID" />
+            </Principal>
+            <Dependent Role="driverroster">
+              <PropertyRef Name="DriverID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="driverbooking_fk1">
+          <End Role="driverroster" Type="Self.driverroster" Multiplicity="1" />
+          <End Role="driverbooking" Type="Self.driverbooking" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="driverroster">
+              <PropertyRef Name="DriverRosterID" />
+            </Principal>
+            <Dependent Role="driverbooking">
+              <PropertyRef Name="DriverRosterID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="driverbooking_fk3">
+          <End Role="vehiclebooking" Type="Self.vehiclebooking" Multiplicity="1" />
+          <End Role="driverbooking" Type="Self.driverbooking" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="vehiclebooking">
+              <PropertyRef Name="VehicleBookingID" />
+            </Principal>
+            <Dependent Role="driverbooking">
+              <PropertyRef Name="VehicleBookingID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="equipmentlist_fk1">
+          <End Role="equipment" Type="Self.equipment" Multiplicity="1" />
+          <End Role="equipmentlist" Type="Self.equipmentlist" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="equipment">
+              <PropertyRef Name="EquipID" />
+            </Principal>
+            <Dependent Role="equipmentlist">
+              <PropertyRef Name="EquipID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="equipmentlist_fk2">
+          <End Role="vehiclebooking" Type="Self.vehiclebooking" Multiplicity="1" />
+          <End Role="equipmentlist" Type="Self.equipmentlist" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="vehiclebooking">
+              <PropertyRef Name="VehicleBookingID" />
+            </Principal>
+            <Dependent Role="equipmentlist">
+              <PropertyRef Name="VehicleBookingID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="flightbooking_fk1">
+          <End Role="flightschedule" Type="Self.flightschedule" Multiplicity="0..1" />
+          <End Role="flightbooking" Type="Self.flightbooking" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="flightschedule">
+              <PropertyRef Name="FlightID" />
+            </Principal>
+            <Dependent Role="flightbooking">
+              <PropertyRef Name="FlightID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="flightbooking_fk3">
+          <End Role="staff" Type="Self.staff" Multiplicity="0..1" />
+          <End Role="flightbooking" Type="Self.flightbooking" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="staff">
+              <PropertyRef Name="StaffID" />
+            </Principal>
+            <Dependent Role="flightbooking">
+              <PropertyRef Name="OrderBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="flightbooking_fk4">
+          <End Role="flightclass" Type="Self.flightclass" Multiplicity="0..1" />
+          <End Role="flightbooking" Type="Self.flightbooking" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="flightclass">
+              <PropertyRef Name="FlightNo" />
+              <PropertyRef Name="Class" />
+              <PropertyRef Name="FlightType" />
+            </Principal>
+            <Dependent Role="flightbooking">
+              <PropertyRef Name="FlightNo" />
+              <PropertyRef Name="FlightClass" />
+              <PropertyRef Name="FlightType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="indirect_fk1">
+          <End Role="flightschedule" Type="Self.flightschedule" Multiplicity="1" />
+          <End Role="indirect" Type="Self.indirect" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="flightschedule">
+              <PropertyRef Name="FlightID" />
+            </Principal>
+            <Dependent Role="indirect">
+              <PropertyRef Name="FlightID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="hotel_room_fk1">
+          <End Role="hotel" Type="Self.hotel" Multiplicity="0..1" />
+          <End Role="hotel_room" Type="Self.hotel_room" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="hotel">
+              <PropertyRef Name="HotelID" />
+            </Principal>
+            <Dependent Role="hotel_room">
+              <PropertyRef Name="HotelID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="hotelbooking_fk1">
+          <End Role="hotel_room" Type="Self.hotel_room" Multiplicity="1" />
+          <End Role="hotelbooking" Type="Self.hotelbooking" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="hotel_room">
+              <PropertyRef Name="Hotel_roomID" />
+            </Principal>
+            <Dependent Role="hotelbooking">
+              <PropertyRef Name="HotelRoomID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="hotelbooking_fk3">
+          <End Role="staff" Type="Self.staff" Multiplicity="0..1" />
+          <End Role="hotelbooking" Type="Self.hotelbooking" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="staff">
+              <PropertyRef Name="StaffID" />
+            </Principal>
+            <Dependent Role="hotelbooking">
+              <PropertyRef Name="OrderBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="vehiclebooking_fk3">
+          <End Role="staff" Type="Self.staff" Multiplicity="0..1" />
+          <End Role="vehiclebooking" Type="Self.vehiclebooking" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="staff">
+              <PropertyRef Name="StaffID" />
+            </Principal>
+            <Dependent Role="vehiclebooking">
+              <PropertyRef Name="OrderBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="vehiclebooking_fk1">
+          <End Role="vehicle" Type="Self.vehicle" Multiplicity="0..1" />
+          <End Role="vehiclebooking" Type="Self.vehiclebooking" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="vehicle">
+              <PropertyRef Name="VehicleID" />
+            </Principal>
+            <Dependent Role="vehiclebooking">
+              <PropertyRef Name="VehicleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="tickettailor_dbEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="attraction" EntityType="Self.attraction" />
+          <EntitySet Name="attractionbooking" EntityType="Self.attractionbooking" />
+          <EntitySet Name="attractionprice" EntityType="Self.attractionprice" />
+          <EntitySet Name="carrier" EntityType="Self.carrier" />
+          <EntitySet Name="corganizer" EntityType="Self.corganizer" />
+          <EntitySet Name="cruise" EntityType="Self.cruise" />
+          <EntitySet Name="cruisebooking" EntityType="Self.cruisebooking" />
+          <EntitySet Name="customer" EntityType="Self.customer" />
+          <EntitySet Name="driver" EntityType="Self.driver" />
+          <EntitySet Name="driverbooking" EntityType="Self.driverbooking" />
+          <EntitySet Name="driverroster" EntityType="Self.driverroster" />
+          <EntitySet Name="equipment" EntityType="Self.equipment" />
+          <EntitySet Name="equipmentlist" EntityType="Self.equipmentlist" />
+          <EntitySet Name="flightbooking" EntityType="Self.flightbooking" />
+          <EntitySet Name="flightclass" EntityType="Self.flightclass" />
+          <EntitySet Name="flightschedule" EntityType="Self.flightschedule" />
+          <EntitySet Name="hotel" EntityType="Self.hotel" />
+          <EntitySet Name="hotel_room" EntityType="Self.hotel_room" />
+          <EntitySet Name="hotelbooking" EntityType="Self.hotelbooking" />
+          <EntitySet Name="indirect" EntityType="Self.indirect" />
+          <EntitySet Name="package" EntityType="Self.package" />
+          <EntitySet Name="staff" EntityType="Self.staff" />
+          <EntitySet Name="tag" EntityType="Self.tag" />
+          <EntitySet Name="vehicle" EntityType="Self.vehicle" />
+          <EntitySet Name="vehiclebooking" EntityType="Self.vehiclebooking" />
+          <AssociationSet Name="attractionbooking_fk1" Association="Self.attractionbooking_fk1">
+            <End Role="attraction" EntitySet="attraction" />
+            <End Role="attractionbooking" EntitySet="attractionbooking" />
+          </AssociationSet>
+          <AssociationSet Name="attractionprice_fk1" Association="Self.attractionprice_fk1">
+            <End Role="attraction" EntitySet="attraction" />
+            <End Role="attractionprice" EntitySet="attractionprice" />
+          </AssociationSet>
+          <AssociationSet Name="package_fk1" Association="Self.package_fk1">
+            <End Role="attraction" EntitySet="attraction" />
+            <End Role="package" EntitySet="package" />
+          </AssociationSet>
+          <AssociationSet Name="attractionbooking_fk2" Association="Self.attractionbooking_fk2">
+            <End Role="staff" EntitySet="staff" />
+            <End Role="attractionbooking" EntitySet="attractionbooking" />
+          </AssociationSet>
+          <AssociationSet Name="attractionbooking_fk3" Association="Self.attractionbooking_fk3">
+            <End Role="customer" EntitySet="customer" />
+            <End Role="attractionbooking" EntitySet="attractionbooking" />
+          </AssociationSet>
+          <AssociationSet Name="vehiclebooking_fk2" Association="Self.vehiclebooking_fk2">
+            <End Role="attractionbooking" EntitySet="attractionbooking" />
+            <End Role="vehiclebooking" EntitySet="vehiclebooking" />
+          </AssociationSet>
+          <AssociationSet Name="flightschedul_fk1" Association="Self.flightschedul_fk1">
+            <End Role="carrier" EntitySet="carrier" />
+            <End Role="flightschedule" EntitySet="flightschedule" />
+          </AssociationSet>
+          <AssociationSet Name="cruise_fk1" Association="Self.cruise_fk1">
+            <End Role="corganizer" EntitySet="corganizer" />
+            <End Role="cruise" EntitySet="cruise" />
+          </AssociationSet>
+          <AssociationSet Name="cruisebooking_fk1" Association="Self.cruisebooking_fk1">
+            <End Role="cruise" EntitySet="cruise" />
+            <End Role="cruisebooking" EntitySet="cruisebooking" />
+          </AssociationSet>
+          <AssociationSet Name="cruisebooking_fk2" Association="Self.cruisebooking_fk2">
+            <End Role="staff" EntitySet="staff" />
+            <End Role="cruisebooking" EntitySet="cruisebooking" />
+          </AssociationSet>
+          <AssociationSet Name="cruisebooking_fk3" Association="Self.cruisebooking_fk3">
+            <End Role="customer" EntitySet="customer" />
+            <End Role="cruisebooking" EntitySet="cruisebooking" />
+          </AssociationSet>
+          <AssociationSet Name="driverbooking_fk2" Association="Self.driverbooking_fk2">
+            <End Role="customer" EntitySet="customer" />
+            <End Role="driverbooking" EntitySet="driverbooking" />
+          </AssociationSet>
+          <AssociationSet Name="flightbooking_fk2" Association="Self.flightbooking_fk2">
+            <End Role="customer" EntitySet="customer" />
+            <End Role="flightbooking" EntitySet="flightbooking" />
+          </AssociationSet>
+          <AssociationSet Name="hotelbooking_fk2" Association="Self.hotelbooking_fk2">
+            <End Role="customer" EntitySet="customer" />
+            <End Role="hotelbooking" EntitySet="hotelbooking" />
+          </AssociationSet>
+          <AssociationSet Name="driverroster_fk1" Association="Self.driverroster_fk1">
+            <End Role="driver" EntitySet="driver" />
+            <End Role="driverroster" EntitySet="driverroster" />
+          </AssociationSet>
+          <AssociationSet Name="driverbooking_fk1" Association="Self.driverbooking_fk1">
+            <End Role="driverroster" EntitySet="driverroster" />
+            <End Role="driverbooking" EntitySet="driverbooking" />
+          </AssociationSet>
+          <AssociationSet Name="driverbooking_fk3" Association="Self.driverbooking_fk3">
+            <End Role="vehiclebooking" EntitySet="vehiclebooking" />
+            <End Role="driverbooking" EntitySet="driverbooking" />
+          </AssociationSet>
+          <AssociationSet Name="equipmentlist_fk1" Association="Self.equipmentlist_fk1">
+            <End Role="equipment" EntitySet="equipment" />
+            <End Role="equipmentlist" EntitySet="equipmentlist" />
+          </AssociationSet>
+          <AssociationSet Name="equipmentlist_fk2" Association="Self.equipmentlist_fk2">
+            <End Role="vehiclebooking" EntitySet="vehiclebooking" />
+            <End Role="equipmentlist" EntitySet="equipmentlist" />
+          </AssociationSet>
+          <AssociationSet Name="flightbooking_fk1" Association="Self.flightbooking_fk1">
+            <End Role="flightschedule" EntitySet="flightschedule" />
+            <End Role="flightbooking" EntitySet="flightbooking" />
+          </AssociationSet>
+          <AssociationSet Name="flightbooking_fk3" Association="Self.flightbooking_fk3">
+            <End Role="staff" EntitySet="staff" />
+            <End Role="flightbooking" EntitySet="flightbooking" />
+          </AssociationSet>
+          <AssociationSet Name="flightbooking_fk4" Association="Self.flightbooking_fk4">
+            <End Role="flightclass" EntitySet="flightclass" />
+            <End Role="flightbooking" EntitySet="flightbooking" />
+          </AssociationSet>
+          <AssociationSet Name="indirect_fk1" Association="Self.indirect_fk1">
+            <End Role="flightschedule" EntitySet="flightschedule" />
+            <End Role="indirect" EntitySet="indirect" />
+          </AssociationSet>
+          <AssociationSet Name="hotel_room_fk1" Association="Self.hotel_room_fk1">
+            <End Role="hotel" EntitySet="hotel" />
+            <End Role="hotel_room" EntitySet="hotel_room" />
+          </AssociationSet>
+          <AssociationSet Name="hotelbooking_fk1" Association="Self.hotelbooking_fk1">
+            <End Role="hotel_room" EntitySet="hotel_room" />
+            <End Role="hotelbooking" EntitySet="hotelbooking" />
+          </AssociationSet>
+          <AssociationSet Name="hotelbooking_fk3" Association="Self.hotelbooking_fk3">
+            <End Role="staff" EntitySet="staff" />
+            <End Role="hotelbooking" EntitySet="hotelbooking" />
+          </AssociationSet>
+          <AssociationSet Name="vehiclebooking_fk3" Association="Self.vehiclebooking_fk3">
+            <End Role="staff" EntitySet="staff" />
+            <End Role="vehiclebooking" EntitySet="vehiclebooking" />
+          </AssociationSet>
+          <AssociationSet Name="vehiclebooking_fk1" Association="Self.vehiclebooking_fk1">
+            <End Role="vehicle" EntitySet="vehicle" />
+            <End Role="vehiclebooking" EntitySet="vehiclebooking" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="tickettailor_dbModelStoreContainer" CdmEntityContainer="tickettailor_dbEntities">
+          <EntitySetMapping Name="attraction">
+            <EntityTypeMapping TypeName="tickettailor_dbModel.attraction">
+              <MappingFragment StoreEntitySet="attraction">
+                <ScalarProperty Name="AttractName" ColumnName="AttractName" />
+                <ScalarProperty Name="Duration" ColumnName="Duration" />
+                <ScalarProperty Name="Cancellation" ColumnName="Cancellation" />
+                <ScalarProperty Name="AttractPhoto" ColumnName="AttractPhoto" />
+                <ScalarProperty Name="City" ColumnName="City" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="attractionbooking">
+            <EntityTypeMapping TypeName="tickettailor_dbModel.attractionbooking">
+              <MappingFragment StoreEntitySet="attractionbooking">
+                <ScalarProperty Name="AttractionBookingID" ColumnName="AttractionBookingID" />
+                <ScalarProperty Name="AttractName" ColumnName="AttractName" />
+                <ScalarProperty Name="AdultNum" ColumnName="AdultNum" />
+                <ScalarProperty Name="ChildNum" ColumnName="ChildNum" />
+                <ScalarProperty Name="AdultPrice" ColumnName="AdultPrice" />
+                <ScalarProperty Name="ChildPrice" ColumnName="ChildPrice" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="OrderDate" ColumnName="OrderDate" />
+                <ScalarProperty Name="OrderBy" ColumnName="OrderBy" />
+                <ScalarProperty Name="CustID" ColumnName="CustID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="attractionprice">
+            <EntityTypeMapping TypeName="tickettailor_dbModel.attractionprice">
+              <MappingFragment StoreEntitySet="attractionprice">
+                <ScalarProperty Name="AttractName" ColumnName="AttractName" />
+                <ScalarProperty Name="Visitor" ColumnName="Visitor" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="carrier">
+            <EntityTypeMapping TypeName="tickettailor_dbModel.carrier">
+              <MappingFragment StoreEntitySet="carrier">
+                <ScalarProperty Name="CID" ColumnName="CID" />
+                <ScalarProperty Name="CarrierName" ColumnName="CarrierName" />
+                <ScalarProperty Name="CarrLogo" ColumnName="CarrLogo" />
+                <ScalarProperty Name="IATA" ColumnName="IATA" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="corganizer">
+            <EntityTypeMapping TypeName="tickettailor_dbModel.corganizer">
+              <MappingFragment StoreEntitySet="corganizer">
+                <ScalarProperty Name="OrganID" ColumnName="OrganID" />
+                <ScalarProperty Name="OrganizerE" ColumnName="OrganizerE" />
+                <ScalarProperty Name="OrganizerC" ColumnName="OrganizerC" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="cruise">
+            <EntityTypeMapping TypeName="tickettailor_dbModel.cruise">
+              <MappingFragment StoreEntitySet="cruise">
+                <ScalarProperty Name="CruiseNo" ColumnName="CruiseNo" />
+                <ScalarProperty Name="CruiseName" ColumnName="CruiseName" />
+                <ScalarProperty Name="RefPrice" ColumnName="RefPrice" />
+                <ScalarProperty Name="TourDay" ColumnName="TourDay" />
+                <ScalarProperty Name="OrganID" ColumnName="OrganID" />
+                <ScalarProperty Name="Info" ColumnName="Info" />
+                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="cruisebooking">
+            <EntityTypeMapping TypeName="tickettailor_dbModel.cruisebooking">
+              <MappingFragment StoreEntitySet="cruisebooking">
+                <ScalarProperty Name="CruiseBookingID" ColumnName="CruiseBookingID" />
+                <ScalarProperty Name="CruiseNo" ColumnName="CruiseNo" />
+                <ScalarProperty Name="AdultNum" ColumnName="AdultNum" />
+                <ScalarProperty Name="ChildNum" ColumnName="ChildNum" />
+                <ScalarProperty Name="AdultPrice" ColumnName="AdultPrice" />
+                <ScalarProperty Name="ChildPrice" ColumnName="ChildPrice" />
+                <ScalarProperty Name="OrderDate" ColumnName="OrderDate" />
+                <ScalarProperty Name="OrderBy" ColumnName="OrderBy" />
+                <ScalarProperty Name="CustID" ColumnName="CustID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="customer">
+            <EntityTypeMapping TypeName="tickettailor_dbModel.customer">
+              <MappingFragment StoreEntitySet="customer">
+                <ScalarProperty Name="CustID" ColumnName="CustID" />
+                <ScalarProperty Name="Surname" ColumnName="Surname" />
+                <ScalarProperty Name="GivenName" ColumnName="GivenName" />
+                <ScalarProperty Name="DateOfBirth" ColumnName="DateOfBirth" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="Passport" ColumnName="Passport" />
+                <ScalarProperty Name="Contact" ColumnName="Contact" />
+                <ScalarProperty Name="Nationality" ColumnName="Nationality" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="driver">
+            <EntityTypeMapping TypeName="tickettailor_dbModel.driver">
+              <MappingFragment StoreEntitySet="driver">
+                <ScalarProperty Name="DriverID" ColumnName="DriverID" />
+                <ScalarProperty Name="StaffName" ColumnName="StaffName" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="Center" ColumnName="Center" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Pass" ColumnName="Pass" />
+                <ScalarProperty Name="Position" ColumnName="Position" />
+                <ScalarProperty Name="Salary" ColumnName="Salary" />
+                <ScalarProperty Name="Ctype" ColumnName="Ctype" />
+                <ScalarProperty Name="Late" ColumnName="Late" />
+                <ScalarProperty Name="SImage" ColumnName="SImage" />
+                <ScalarProperty Name="SparePass" ColumnName="SparePass" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="driverbooking">
+            <EntityTypeMapping TypeName="tickettailor_dbModel.driverbooking">
+              <MappingFragment StoreEntitySet="driverbooking">
+                <ScalarProperty Name="DriverRosterID" ColumnName="DriverRosterID" />
+                <ScalarProperty Name="BookingDate" ColumnName="BookingDate" />
+                <ScalarProperty Name="CustID" ColumnName="CustID" />
+                <ScalarProperty Name="VehicleBookingID" ColumnName="VehicleBookingID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="driverroster">
+            <EntityTypeMapping TypeName="tickettailor_dbModel.driverroster">
+              <MappingFragment StoreEntitySet="driverroster">
+                <ScalarProperty Name="DriverRosterID" ColumnName="DriverRosterID" />
+                <ScalarProperty Name="DriverID" ColumnName="DriverID" />
+                <ScalarProperty Name="TimeSlot" ColumnName="TimeSlot" />
+                <ScalarProperty Name="Available" ColumnName="Available" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="equipment">
+            <EntityTypeMapping TypeName="tickettailor_dbModel.equipment">
+              <MappingFragment StoreEntitySet="equipment">
+                <ScalarProperty Name="EquipID" ColumnName="EquipID" />
+                <ScalarProperty Name="Equipment1" ColumnName="Equipment" />
+                <ScalarProperty Name="Suitable" ColumnName="Suitable" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="EquipPhoto" ColumnName="EquipPhoto" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="equipmentlist">
+            <EntityTypeMapping TypeName="tickettailor_dbModel.equipmentlist">
+              <MappingFragment StoreEntitySet="equipmentlist">
+                <ScalarProperty Name="VehicleBookingID" ColumnName="VehicleBookingID" />
+                <ScalarProperty Name="EquipID" ColumnName="EquipID" />
+                <ScalarProperty Name="EquipNum" ColumnName="EquipNum" />
+                <ScalarProperty Name="EquipBookPrice" ColumnName="EquipBookPrice" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="flightbooking">
+            <EntityTypeMapping TypeName="tickettailor_dbModel.flightbooking">
+              <MappingFragment StoreEntitySet="flightbooking">
+                <ScalarProperty Name="FlightOrderID" ColumnName="FlightOrderID" />
+                <ScalarProperty Name="FlightID" ColumnName="FlightID" />
+                <ScalarProperty Name="FlightNo" ColumnName="FlightNo" />
+                <ScalarProperty Name="FlightClass" ColumnName="FlightClass" />
+                <ScalarProperty Name="FlightType" ColumnName="FlightType" />
+                <ScalarProperty Name="AdultNum" ColumnName="AdultNum" />
+                <ScalarProperty Name="ChildNum" ColumnName="ChildNum" />
+                <ScalarProperty Name="InfantNum" ColumnName="InfantNum" />
+                <ScalarProperty Name="AdultPrice" ColumnName="AdultPrice" />
+                <ScalarProperty Name="ChildPrice" ColumnName="ChildPrice" />
+                <ScalarProperty Name="InfantPrice" ColumnName="InfantPrice" />
+                <ScalarProperty Name="OrderDate" ColumnName="OrderDate" />
+                <ScalarProperty Name="OrderBy" ColumnName="OrderBy" />
+                <ScalarProperty Name="CustID" ColumnName="CustID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="flightclass">
+            <EntityTypeMapping TypeName="tickettailor_dbModel.flightclass">
+              <MappingFragment StoreEntitySet="flightclass">
+                <ScalarProperty Name="FlightNo" ColumnName="FlightNo" />
+                <ScalarProperty Name="Class" ColumnName="Class" />
+                <ScalarProperty Name="FlightType" ColumnName="FlightType" />
+                <ScalarProperty Name="Price_Adult" ColumnName="Price_Adult" />
+                <ScalarProperty Name="Price_Children" ColumnName="Price_Children" />
+                <ScalarProperty Name="Price_Infant" ColumnName="Price_Infant" />
+                <ScalarProperty Name="Tax" ColumnName="Tax" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="flightschedule">
+            <EntityTypeMapping TypeName="tickettailor_dbModel.flightschedule">
+              <MappingFragment StoreEntitySet="flightschedule">
+                <ScalarProperty Name="FlightID" ColumnName="FlightID" />
+                <ScalarProperty Name="Carrier" ColumnName="Carrier" />
+                <ScalarProperty Name="EDD" ColumnName="EDD" />
+                <ScalarProperty Name="EDA" ColumnName="EDA" />
+                <ScalarProperty Name="ETD" ColumnName="ETD" />
+                <ScalarProperty Name="ETA" ColumnName="ETA" />
+                <ScalarProperty Name="Origin" ColumnName="Origin" />
+                <ScalarProperty Name="Dest" ColumnName="Dest" />
+                <ScalarProperty Name="Aircraft" ColumnName="Aircraft" />
+                <ScalarProperty Name="TravelTime" ColumnName="TravelTime" />
+                <ScalarProperty Name="FlightNo" ColumnName="FlightNo" />
+                <ScalarProperty Name="FlightType" ColumnName="FlightType" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="hotel">
+            <EntityTypeMapping TypeName="tickettailor_dbModel.hotel">
+              <MappingFragment StoreEntitySet="hotel">
+                <ScalarProperty Name="HotelID" ColumnName="HotelID" />
+                <ScalarProperty Name="Hotel_chi_name" ColumnName="Hotel_chi_name" />
+                <ScalarProperty Name="Hotel_en_name" ColumnName="Hotel_en_name" />
+                <ScalarProperty Name="Star" ColumnName="Star" />
+                <ScalarProperty Name="Rating" ColumnName="Rating" />
+                <ScalarProperty Name="Region" ColumnName="Region" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Tel" ColumnName="Tel" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="hotel_room">
+            <EntityTypeMapping TypeName="tickettailor_dbModel.hotel_room">
+              <MappingFragment StoreEntitySet="hotel_room">
+                <ScalarProperty Name="Hotel_roomID" ColumnName="Hotel_roomID" />
+                <ScalarProperty Name="Hotel_chi_name" ColumnName="Hotel_chi_name" />
+                <ScalarProperty Name="Hotel_room_name" ColumnName="Hotel_room_name" />
+                <ScalarProperty Name="Hotel_room_size" ColumnName="Hotel room size" />
+                <ScalarProperty Name="Max_adult" ColumnName="Max_adult" />
+                <ScalarProperty Name="Max_child" ColumnName="Max_child" />
+                <ScalarProperty Name="Hotel_room_description" ColumnName="Hotel_room_description" />
+                <ScalarProperty Name="Fare" ColumnName="Fare" />
+                <ScalarProperty Name="HotelID" ColumnName="HotelID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="hotelbooking">
+            <EntityTypeMapping TypeName="tickettailor_dbModel.hotelbooking">
+              <MappingFragment StoreEntitySet="hotelbooking">
+                <ScalarProperty Name="HotelRoomID" ColumnName="HotelRoomID" />
+                <ScalarProperty Name="Checkin" ColumnName="Checkin" />
+                <ScalarProperty Name="Checkout" ColumnName="Checkout" />
+                <ScalarProperty Name="CustID" ColumnName="CustID" />
+                <ScalarProperty Name="NumNight" ColumnName="NumNight" />
+                <ScalarProperty Name="NumRoom" ColumnName="NumRoom" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="OrderDate" ColumnName="OrderDate" />
+                <ScalarProperty Name="OrderBy" ColumnName="OrderBy" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="indirect">
+            <EntityTypeMapping TypeName="tickettailor_dbModel.indirect">
+              <MappingFragment StoreEntitySet="indirect">
+                <ScalarProperty Name="FlightID" ColumnName="FlightID" />
+                <ScalarProperty Name="StopNo" ColumnName="StopNo" />
+                <ScalarProperty Name="Stop" ColumnName="Stop" />
+                <ScalarProperty Name="EDD" ColumnName="EDD" />
+                <ScalarProperty Name="ETD" ColumnName="ETD" />
+                <ScalarProperty Name="EDA" ColumnName="EDA" />
+                <ScalarProperty Name="ETA" ColumnName="ETA" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="package">
+            <EntityTypeMapping TypeName="tickettailor_dbModel.package">
+              <MappingFragment StoreEntitySet="package">
+                <ScalarProperty Name="PackageNo" ColumnName="PackageNo" />
+                <ScalarProperty Name="Attaction" ColumnName="Attaction" />
+                <ScalarProperty Name="Package1" ColumnName="Package" />
+                <ScalarProperty Name="Adult_price" ColumnName="Adult_price" />
+                <ScalarProperty Name="Child_price" ColumnName="Child_price" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="staff">
+            <EntityTypeMapping TypeName="tickettailor_dbModel.staff">
+              <MappingFragment StoreEntitySet="staff">
+                <ScalarProperty Name="StaffID" ColumnName="StaffID" />
+                <ScalarProperty Name="StaffName" ColumnName="StaffName" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="Center" ColumnName="Center" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Pass" ColumnName="Pass" />
+                <ScalarProperty Name="Position" ColumnName="Position" />
+                <ScalarProperty Name="Salary" ColumnName="Salary" />
+                <ScalarProperty Name="Ctype" ColumnName="Ctype" />
+                <ScalarProperty Name="Late" ColumnName="Late" />
+                <ScalarProperty Name="SImage" ColumnName="SImage" />
+                <ScalarProperty Name="SparePass" ColumnName="SparePass" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tag">
+            <EntityTypeMapping TypeName="tickettailor_dbModel.tag">
+              <MappingFragment StoreEntitySet="tag">
+                <ScalarProperty Name="Tag" ColumnName="Tag" />
+                <ScalarProperty Name="TagTypeID" ColumnName="TagTypeID" />
+                <ScalarProperty Name="TagType" ColumnName="TagType" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vehicle">
+            <EntityTypeMapping TypeName="tickettailor_dbModel.vehicle">
+              <MappingFragment StoreEntitySet="vehicle">
+                <ScalarProperty Name="VehicleID" ColumnName="VehicleID" />
+                <ScalarProperty Name="VehicleName" ColumnName="VehicleName" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="VehicleType" ColumnName="VehicleType" />
+                <ScalarProperty Name="Capacity" ColumnName="Capacity" />
+                <ScalarProperty Name="Gear" ColumnName="Gear" />
+                <ScalarProperty Name="Color" ColumnName="Color" />
+                <ScalarProperty Name="VehiclePhoto" ColumnName="VehiclePhoto" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vehiclebooking">
+            <EntityTypeMapping TypeName="tickettailor_dbModel.vehiclebooking">
+              <MappingFragment StoreEntitySet="vehiclebooking">
+                <ScalarProperty Name="VehicleBookingID" ColumnName="VehicleBookingID" />
+                <ScalarProperty Name="VehicleID" ColumnName="VehicleID" />
+                <ScalarProperty Name="AttractionBookingID" ColumnName="AttractionBookingID" />
+                <ScalarProperty Name="BookDay" ColumnName="BookDay" />
+                <ScalarProperty Name="OrderDate" ColumnName="OrderDate" />
+                <ScalarProperty Name="OrderBy" ColumnName="OrderBy" />
+                <ScalarProperty Name="PickupDate" ColumnName="PickupDate" />
+                <ScalarProperty Name="DropoffDate" ColumnName="DropoffDate" />
+                <ScalarProperty Name="DriverCost" ColumnName="DriverCost" />
+                <ScalarProperty Name="VehicleBookPrice" ColumnName="VehicleBookPrice" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="true" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
