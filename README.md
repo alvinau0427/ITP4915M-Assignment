@@ -3,9 +3,8 @@
 
 > Visual Studio Application (C# & MySQL): Integrated Tourism Management System
 
-[![Build Status](http://img.shields.io/travis/badges/badgerbadgerbadger.svg?style=flat-square)](https://travis-ci.org/badges/badgerbadgerbadger)
-[![Coverage Status](http://img.shields.io/coveralls/badges/badgerbadgerbadger.svg?style=flat-square)](https://coveralls.io/r/badges/badgerbadgerbadger)
-[![License](http://img.shields.io/:license-mit-blue.svg?style=flat-square)](http://badges.mit-license.org)
+[![Build Status](https://travis-ci.com/alvinau0427/ITP4915M-Assignment.svg?branch=master)](https://travis-ci.org/alvinau0427/ITP4915M-Assignment)
+[![License](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 
 ## Getting Stated
 1. The objective of this management system project is to develop a system that automates the processes and activities of a travel and tourism information.
@@ -26,7 +25,7 @@
 ![image](https://github.com/alvinau0427/ITP4915M-Assignment/blob/master/doc/demo.gif)
 
 ## License
-- ITP4915M-Assignment is released under the [MIT license](https://opensource.org/licenses/MIT).
+- ITP4915M-Assignment is released under the [MIT License](https://opensource.org/licenses/MIT).
 ```
 Copyright (c) 2020 alvinau0427
 
