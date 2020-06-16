@@ -22,7 +22,7 @@
 
 - Open the file from `src/Integrated Tourism Management System` then compile
 
-## Demonstration
+## Screenshots
 ![image](https://github.com/alvinau0427/ITP4915M-Assignment/blob/master/doc/demo.gif)
 
 ## License
