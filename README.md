@@ -22,7 +22,7 @@
 - Open the file from `src/Integrated Tourism Management System` then compile
 
 ## Screenshots
-![image](https://github.com/alvinau0427/ITP4915M-Assignment/blob/master/doc/demo.gif)
+![Image](https://github.com/alvinau0427/ITP4915M-Assignment/blob/master/doc/demo.gif)
 
 ## License
 - ITP4915M-Assignment is released under the [MIT License](https://opensource.org/licenses/MIT).
